@@ -57,6 +57,7 @@ npm run dev
 Abra http://localhost:5173 no seu navegador (com visualização mobile recomendada).
 
 ## 📂 Estrutura de Pastas
+```sh
 ├── src/                # Frontend React
 │   ├── components/     # UI Components (NPCForm, NPCCard)
 │   ├── services/       # Chamadas de API (aiService.ts)
@@ -67,6 +68,7 @@ Abra http://localhost:5173 no seu navegador (com visualização mobile recomenda
 │   ├── server.ts       # Endpoints de Texto e Imagem
 │   └── .env            # Chaves Privadas (Não versionado)
 └── README.md
+```
 
 ## 🎓 Aprendizados Relevantes
 
