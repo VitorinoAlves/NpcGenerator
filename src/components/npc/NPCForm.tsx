@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Shield, Sparkles, User, BookType, Ghost, Search } from "lucide-react";
 import { npcFormSchema, type NPCFormData } from "../../schemas/npcFormSchema";
 import { generateNPCData } from "../../services/aiService";
+import { useNPCStore } from '../../store/useNPCStore';
 
 export function NPCForm() {
     const {
@@ -19,8 +20,7 @@ export function NPCForm() {
             const npcResult = await generateNPCData(data);
 
             // 2. Salva o resultado no estado global (Zustand) para exibir no Card
-            // useNPCStore.getState().setCurrentNPC(npcResult);
-
+            useNPCStore.getState().setCurrentNPC(npcResult);
             console.log("NPC Gerado com Sucesso:", npcResult);
         } catch (error) {
             console.error("Erro ao gerar NPC:", error);

@@ -1,73 +1,76 @@
-# React + TypeScript + Vite
+# ⚔️ NPC Forge: Gerador Universal de Personagens
+O NPC Forge é uma aplicação Full Stack desenvolvida para mestres de RPG que precisam de inspiração rápida. Utilizando a inteligência artificial do Google Gemini (2.5 Flash) e o modelo multimodal Nano Banana, o projeto gera fichas completas de NPCs com nome, história, atributos e retratos visuais, tudo adaptado ao sistema de RPG escolhido.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto foi construído como um exercício de reciclagem técnica, focando em tecnologias de ponta e arquitetura modular.
 
-Currently, two official plugins are available:
+## 🚀 Tecnologias Utilizadas
+Frontend
+- React 19 + Vite
+- TypeScript (Tipagem rigorosa)
+- Tailwind CSS (Design Mobile-First e responsivo)
+- Zustand (Gerenciamento de estado global leve)
+- React Hook Form + Zod (Validação robusta de formulários)
+- Lucide React (Ícones imersivos)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Backend (Oráculo)
+- Node.js + Express
+- Vercel AI SDK (Integração com modelos de linguagem)
+- Google GenAI SDK (Geração de imagens nativa com Gemini 2.5 Flash Image)
 
-## React Compiler
+## 🛠️ Configuração do Ambiente
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+O projeto é dividido em duas pastas: client (ou a raiz do Vite) e server.
 
-## Expanding the ESLint configuration
+1. Configuração do Servidor
+Navegue até a pasta do servidor:
+```sh
+cd server
+npm install
+```
+Crie um arquivo .env dentro da pasta server e adicione sua chave do Google AI Studio:
+```sh
+# Server .env
+GOOGLE_GENERATIVE_AI_API_KEY=sua_chave_aqui
+PORT=3001
+```
+Nota: Você pode obter sua chave gratuitamente em aistudio.google.com
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. Configuração do Frontend
+Navegue até a raiz do projeto (ou pasta client):
+```sh
+# Server .env
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🏃 Como Rodar
+Iniciar o Servidor
+```sh
+# Na pasta server
+node .\index.js
 ```
+Iniciar o Frontend
+```sh
+# Na pasta principal
+npm run dev
+```
+
+Abra http://localhost:5173 no seu navegador (com visualização mobile recomendada).
+
+## 📂 Estrutura de Pastas
+├── src/                # Frontend React
+│   ├── components/     # UI Components (NPCForm, NPCCard)
+│   ├── services/       # Chamadas de API (aiService.ts)
+│   ├── store/          # Estado Global com Zustand
+│   ├── schemas/        # Validações Zod
+│   └── types/          # Interfaces TypeScript
+├── server/             # Backend Express
+│   ├── server.ts       # Endpoints de Texto e Imagem
+│   └── .env            # Chaves Privadas (Não versionado)
+└── README.md
+
+## 🎓 Aprendizados Relevantes
+
+- Separação de Camadas: Migração de chamadas de API do cliente para o servidor por motivos de segurança (CORS e proteção de API Keys).
+- UX em IA: Implementação de geração de imagem on-demand para economizar recursos e melhorar a percepção de velocidade.
+- Prompt Engineering: Estruturação de system prompts para garantir que a IA responda sempre em JSON válido seguindo um contrato pré-definido.
+- Estado Multimodal: Gerenciar dados de texto e fluxos de imagem em Base64 de forma assíncrona.
